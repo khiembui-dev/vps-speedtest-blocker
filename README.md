@@ -28,3 +28,12 @@ Một công cụ đơn giản giúp bạn **chặn tất cả các trang và ứ
 
 ```bash
 bash <(curl -sSL https://raw.githubusercontent.com/khiembui-dev/vps-speedtest-blocker/main/block_speedtest_safe.sh)
+
+---
+
+### 🔓 2. Gỡ chặn speedtest / fast.com
+
+Nếu bạn muốn **mở lại truy cập các công cụ đo tốc độ**, hãy chạy lệnh sau trên VPS:
+
+```bash
+bash <(curl -sSL https://raw.githubusercontent.com/khiembui-dev/vps-speedtest-blocker/main/unblock_speedtest.sh)
