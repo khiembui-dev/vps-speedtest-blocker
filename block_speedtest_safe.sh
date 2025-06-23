@@ -1,39 +1,42 @@
 #!/bin/bash
 
-echo "[+] Blocking SpeedTest, Fast.com, and similar tools..."
+echo "🔒 Đang tiến hành chặn các công cụ đo tốc độ mạng..."
 
-DOMAINS=(
-  "speedtest.net"
-  "www.speedtest.net"
-  "fast.com"
-  "www.fast.com"
-  "speed.nperf.com"
-  "nperf.com"
+# Backup /etc/hosts
+cp /etc/hosts /etc/hosts.backup.$(date +%s)
+
+# Chặn domain qua /etc/hosts
+domains_to_block=(
+    "speedtest.net"
+    "www.speedtest.net"
+    "fast.com"
+    "www.fast.com"
+    "nperf.com"
+    "www.nperf.com"
 )
 
-for domain in "${DOMAINS[@]}"; do
-  if ! grep -q "$domain" /etc/hosts; then
-    echo "127.0.0.1 $domain" >> /etc/hosts
-    echo "[+] Added $domain to /etc/hosts"
-  fi
+for domain in "${domains_to_block[@]}"; do
+    if ! grep -q "$domain" /etc/hosts; then
+        echo "127.0.0.1 $domain" >> /etc/hosts
+    fi
 done
 
-PORTS=( 5201 8080 8081 8888 7547 )
+# Chặn các port phổ biến
+# iperf3 mặc định dùng port 5201 (TCP/UDP)
+iptables -A INPUT -p tcp --dport 5201 -j DROP
+iptables -A INPUT -p udp --dport 5201 -j DROP
+iptables -A OUTPUT -p tcp --dport 5201 -j DROP
+iptables -A OUTPUT -p udp --dport 5201 -j DROP
 
-for port in "${PORTS[@]}"; do
-  iptables -A INPUT -p tcp --dport $port -j DROP
-  iptables -A INPUT -p udp --dport $port -j DROP
-  iptables -A OUTPUT -p tcp --dport $port -j DROP
-  iptables -A OUTPUT -p udp --dport $port -j DROP
-  echo "[+] Blocked port $port (TCP/UDP)"
-done
+# Chặn fast.com (sử dụng domain phụ của Netflix)
+# (Tuỳ chọn, không cần nếu chỉ block DNS chính)
+# iptables -A OUTPUT -d fast.com -j REJECT
 
-if command -v netfilter-persistent &> /dev/null; then
-  netfilter-persistent save
-  echo "[✔] Saved iptables rules"
-elif command -v iptables-save &> /dev/null; then
-  iptables-save > /etc/iptables.rules
-  echo "[!] Saved iptables manually to /etc/iptables.rules"
+# Lưu iptables (Debian/Ubuntu)
+if command -v netfilter-persistent &>/dev/null; then
+    netfilter-persistent save
+elif command -v iptables-save &>/dev/null; then
+    iptables-save > /etc/iptables/rules.v4
 fi
 
-echo "[✅] Done. SpeedTest & Fast.com blocked. Cloudflare untouched."
+echo "✅ Đã chặn xong speedtest.net, fast.com và nperf.com"
