@@ -28,3 +28,14 @@ Chạy lệnh sau trên VPS của bạn:
 
 ```bash
 bash <(curl -sSL https://raw.githubusercontent.com/khiembui-dev/vps-speedtest-blocker/main/block_speedtest_safe.sh)
+```
+### 🔓 2. Gỡ chặn speedtest / fast.com
+
+Nếu bạn muốn **khôi phục quyền truy cập vào các công cụ đo tốc độ**, hãy chạy lệnh sau:
+
+```bash
+bash <(curl -sSL https://raw.githubusercontent.com/khiembui-dev/vps-speedtest-blocker/main/unblock_speedtest.sh)
+```
+
+
+
