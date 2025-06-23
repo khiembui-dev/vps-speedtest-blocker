@@ -2,9 +2,9 @@
 
 Một công cụ đơn giản giúp bạn **chặn tất cả các trang và ứng dụng đo tốc độ mạng** như:
 
-- 🌐 `speedtest.net`
-- ⚡ `fast.com`
-- 📶 `nperf.com`
+- 🌐 `speedtest.net`  
+- ⚡ `fast.com`  
+- 📶 `nperf.com`  
 - ⚙️ `iperf3` (port 5201)
 
 ✅ Dành cho các VPS đang chia sẻ VPN, SSH, Proxy hoặc cần ẩn thông tin băng thông thật.
@@ -13,10 +13,10 @@ Một công cụ đơn giản giúp bạn **chặn tất cả các trang và ứ
 
 ## 🧩 Tính Năng Chính
 
-- Chặn domain bằng `/etc/hosts`
-- Chặn các port thường dùng bởi các công cụ đo tốc độ (TCP & UDP)
-- Không chặn các dịch vụ như Cloudflare, YouTube, Facebook
-- Có sẵn lệnh **gỡ chặn (unblock)** dễ sử dụng
+- Chặn domain bằng `/etc/hosts`  
+- Chặn các port thường dùng bởi các công cụ đo tốc độ (TCP & UDP)  
+- Không chặn các dịch vụ như Cloudflare, YouTube, Facebook  
+- Có sẵn lệnh **gỡ chặn (unblock)** dễ sử dụng  
 
 ---
 
@@ -24,16 +24,15 @@ Một công cụ đơn giản giúp bạn **chặn tất cả các trang và ứ
 
 ### ✅ 1. Chặn toàn bộ speedtest / fast.com
 
-**Chạy lệnh sau trên VPS của bạn:**
+Chạy lệnh sau trên VPS của bạn:
 
 ```bash
 bash <(curl -sSL https://raw.githubusercontent.com/khiembui-dev/vps-speedtest-blocker/main/block_speedtest_safe.sh)
 
----
+### ✅ 1.Bỏ chặn toàn bộ speedtest / fast.com
 
-### 🔓 2. Gỡ chặn speedtest / fast.com
-
-Nếu bạn muốn **mở lại truy cập các công cụ đo tốc độ**, hãy chạy lệnh sau trên VPS:
+Chạy lệnh sau trên VPS của bạn:
 
 ```bash
 bash <(curl -sSL https://raw.githubusercontent.com/khiembui-dev/vps-speedtest-blocker/main/unblock_speedtest.sh)
+
